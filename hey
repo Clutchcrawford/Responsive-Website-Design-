@@ -1,0 +1,44 @@
+// Declare the required
+	// private member variables.
+		String name;
+		Double price;
+		int quantity;
+		
+		// Declare the required
+		// parametrized constructor.
+		public Product (String Name, Double Price)
+		{
+			name = Name;
+			price = Price;
+			quantity = 0;
+		}
+		
+		// Define the
+		// accessors and mutators.
+		
+		public String getName()
+		{
+			return name;
+		}
+		public Double getPrice()
+		{
+			return price;
+		}
+		public int getQuantity()
+		{
+			return quantity;
+		}
+		
+		// Define the method to return
+		// the total cost of the product.
+		public Double getTotal()
+		{
+			return price * quantity;
+		}
+		
+		// Define the method to increase
+		// the quantity of the product.
+		public void buyItem(int quant)
+		{
+			quantity += quant;
+		}

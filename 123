@@ -1,0 +1,109 @@
+// Define the method
+		// to print the menu().
+		public static void menu(Product products[])
+		{
+			System.out.println("************ Our"+"Menu ***********");
+			
+			// Run the loop to traverse teh 
+			// array and print the
+			// product details.
+			for(int i=0; i<products.length; i++)
+			{
+				System.out.printf("%-9d", i+1);
+				System.out.printf("%-16s", products[i].getName());
+				System.out.printf("$%.2f\n", products[i].getPrice());
+			}
+			System.out.println("********** *******"+ "*********");
+		}
+		
+		//Define the method
+		//to print the receipt.
+		public static void printRec(Product products[])
+		{
+			//Declare the
+			// required variables.
+			Double total = 0.0;
+			Double tax = 0.0;
+			Double tax_rate = 0.06;
+			
+			System.out.println("******** ******"+ "*******");
+			
+			System.out.println("Here is Your Order Receipt:");
+			System.out.printf("%-9s%-16Total\n", "Item", "Quantity");
+			// Run the loop to traverse the array.
+			for(int i=0; i<products.length; i++)
+			{
+				// If the quantity of the product
+				// is greater than 0, display
+				// the details of the product.
+				if(products[i].getQuantity() > 0)
+				{
+					System.out.printf("%-12s", products[i].getName());
+					System.out.printf("%-13d", products[i].getQuantity());
+					System.out.printf("$%.2f\n", products[i].getTotal()); total+= products[i].getTotal();
+					
+				}
+			}
+			System.out.println();
+			tax = tax_rate*total;
+			total = total + tax;
+			System.out.printf("%-25s","Tax");
+			System.out.printf("$%.2f\n", tax);
+			System.out.printf("%-25s", " ");
+			System.out.printf("$%.2f\n", total);
+		}
+		
+		// Define the main() method.
+		public static void main(String[] args)
+		{
+			// Define an array to store 4 products.
+			Product[] products = new Product[4];
+			
+			// Insert the products
+			// Into the array.
+			products[0] = new Product("Coffee", 3.65);
+			products[1] = new Product("Tea", 2.45);
+			products[2] = new Product("Bagels", 1.50);
+			products[3] = new Product("Muffins", 1.85);
+			Scanner in = new Scanner(System.in);
+			
+			// Display the menu.
+			menu(products);
+			
+			int prodld = -1;
+			int quantity = 0;
+			
+			// Run the loop till
+			// the user enters 0.
+			while(prodld != 0)
+			{
+				// Prompt the user to enter
+				// the product id or 0.
+				System.out.println("Please enter the product ID from the menu" + " or (0 to quit and get the receipt)");
+				
+				prodld = in.nextInt();
+				
+				switch(prodld)
+				{
+					case 0:
+					break;
+					case 1:
+					case 2:
+					case 3:
+					case 4:
+					System.out.println("Please enter quantity sold for item " + prodld + ":");
+					quantity = in.nextInt();
+					products[prodld-1].buyItem(quantity);
+					break;
+					default:
+					System.out.println("The product number must be"+ " 1 to 4 or 0 to quit" + " and to get the receipt,"+ " please try again");
+					
+				}
+			}
+			// Display the receipt.
+			printRec(products);
+			
+			// Close the object of
+			// the Scanner class.
+			in.close();
+		}
